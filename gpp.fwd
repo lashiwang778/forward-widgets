@@ -1,12 +1,12 @@
 {
-  "title": "Reflix 热门剧集",
+  "title": "Reflix Trending",
   "description": "Forward Official Widgets",
   "icon": "https://assets.vvebo.vip/scripts/icon.png",
   "widgets": [
     {
       "id": "forward.reflix",
       "title": "TMDB",
-      "description": "获取 TMDB 的榜单数据",
+      "description": "获取 Reflix 的热播剧集数据",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
       "author": "糙大叔",
