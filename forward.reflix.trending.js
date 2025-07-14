@@ -1,60 +1,63 @@
-// =============UserScript=============
-// @name Reflix 热门剧集
-// @version 1.0.0
-// @description 使用 Reflix API 获取今日最受欢迎的剧集
-// @author 糙大叔
-// =============UserScript=============
-
 WidgetMetadata = {
   id: "forward.reflix",
-  title: "Reflix 热门剧集",
+  title: "Reflix Trending",
   version: "1.0.0",
   requiredVersion: "0.0.1",
-  description: "展示 Reflix 来源的 TMDB 热榜电视剧（无模块分类）",
-  author: "糙大叔"
+  description: "获取 Reflix 的热播剧集数据",
+  author: "糙大叔",
+  site: "https://api.reflix.top",
+  modules: [
+    {
+      id: "reflixTrendingTv",
+      title: "趋势剧集",
+      functionName: "reflixTrendingTv",
+      params: [
+        {
+          name: "page",
+          title: "页码",
+          type: "page",
+          value: 1,
+        },
+        {
+          name: "language",
+          title: "语言",
+          type: "language",
+          value: "zh-CN",
+        },
+      ],
+    },
+  ],
 };
 
-async function widget(params = {}) {
-  const page = parseInt(params.page) || 1;
-  const url = `https://api.reflix.top/lookup?language=zh-CN&path=/trending/tv/day?page=${page}&sort_by=popularity.desc`;
-
+// 请求数据函数
+async function fetchReflixTrendingTv(api, params) {
   try {
-    const response = await Widget.http.get(url);
-    const data = response?.data?.results || [];
+    const response = await Widget.http.get(api, { params });
+    if (!response || !response.data) {
+      throw new Error("Reflix 数据请求失败");
+    }
 
-    return data.map(item => ({
-      id: String(item.id),
-      type: "tmdb",
-      title: item.name || item.title || "未知标题",
-      description: item.overview || "暂无简介",
-      releaseDate: item.first_air_date || "",
-      rating: item.vote_average || 0,
-      genreTitle: getGenreText(item.genre_ids),
-      coverUrl: item.poster_path
-        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-        : "https://via.placeholder.com/300x450?text=暂无封面",
-      url: `https://www.themoviedb.org/tv/${item.id}`
+    // 假设返回的是一个数组格式，你可以按实际结构进行调整
+    return response.data.map((item) => ({
+      id: item.id,
+      type: "reflix",
+      title: item.title ?? item.name,
+      description: item.overview ?? item.description,
+      releaseDate: item.release_date ?? item.first_air_date,
+      rating: item.vote_average,
+      posterPath: item.poster_path,
     }));
-
   } catch (error) {
-    console.error("加载 Reflix 数据失败：", error);
-    return [{
-      id: "error",
-      type: "error",
-      title: "加载失败",
-      description: `错误信息：${error.message || "未知"}`
-    }];
+    console.error("调用 Reflix API 失败:", error);
+    throw error;
   }
 }
 
-function getGenreText(ids = []) {
-  const genres = {
-    10759: "动作冒险", 16: "动画", 35: "喜剧", 80: "犯罪", 99: "纪录片",
-    18: "剧情", 10751: "家庭", 10762: "儿童", 9648: "悬疑", 10764: "真人秀",
-    10765: "科幻奇幻", 10766: "肥皂剧", 10767: "脱口秀", 10768: "战争政治",
-    28: "动作", 12: "冒险", 14: "奇幻", 36: "历史", 27: "恐怖",
-    10402: "音乐", 10749: "爱情", 878: "科幻", 10770: "电视电影",
-    53: "惊悚", 10752: "战争", 37: "西部"
-  };
-  return ids.slice(0, 2).map(id => genres[id]).filter(Boolean).join(", ");
+// 模块处理函数
+async function reflixTrendingTv(params) {
+  const page = params.page ?? 1;
+  const language = params.language ?? "zh-CN";
+  const api = `https://api.reflix.top/lookup?language=${language}&path=/trending/tv/day?page=${page}&sort_by=popularity.desc`;
+
+  return await fetchReflixTrendingTv(api, params);
 }
