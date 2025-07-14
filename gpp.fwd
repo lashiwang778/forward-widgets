@@ -1,0 +1,9 @@
+{
+  "id": "forward.reflix.trending",
+  "title": "Reflix 热门剧集",
+  "description": "展示 Reflix 热门剧集列表",
+  "requiredVersion": "0.0.1",
+  "version": "1.0.0",
+  "author": "糙大叔",
+  "url": "https://你的模块托管地址/forward.reflix.trending.js"
+}
