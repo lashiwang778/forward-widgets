@@ -1,15 +1,15 @@
 {
-  "title": "Forward Widgets test",
+  "title": "Reflix 热门剧集",
   "description": "Forward Official Widgets",
   "icon": "https://assets.vvebo.vip/scripts/icon.png",
   "widgets": [
     {
-      "id": "forward.tmdb.test",
+      "id": "forward.reflix.tv.trending",
       "title": "TMDB",
       "description": "获取 TMDB 的榜单数据",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
-      "author": "Forward",
+      "author": "糙大叔",
       "url": "https://raw.githubusercontent.com/lashiwang778/forward-widgets/main/forward.reflix.trending.js"
     }
   ]
