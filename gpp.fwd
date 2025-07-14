@@ -4,7 +4,7 @@
   "icon": "https://assets.vvebo.vip/scripts/icon.png",
   "widgets": [
     {
-      "id": "forward.reflix.trending",
+      "id": "forward.tmdb",
       "title": "Reflix Trending",
       "description": "获取 Reflix 的热播剧集数据",
       "requiredVersion": "0.0.1",
