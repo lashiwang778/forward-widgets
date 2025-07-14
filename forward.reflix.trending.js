@@ -23,6 +23,7 @@ WidgetMetadata = {
           title: "语言",
           type: "language",
           value: "zh-CN",
+        
         },
       ],
     },
@@ -33,19 +34,20 @@ WidgetMetadata = {
 async function fetchReflixTrendingTv(api, params) {
   try {
     const response = await Widget.http.get(api);
-    if (!response || !response.data) {
-      throw new Error("Reflix 数据请求失败");
+
+    if (!response || !response.data || !response.data.items) {
+      throw new Error("Reflix 数据格式错误");
     }
 
-    // 假设返回的是一个数组格式，你可以按实际结构进行调整
-    return response.data.results.map(...)
+    return response.data.items.map((item) => ({
       id: item.id,
-      type: "reflix",
-      title: item.title ?? item.name,
-      description: item.overview ?? item.description,
-      releaseDate: item.release_date ?? item.first_air_date,
+      type: "tv",
+      title: item.name ?? item.original_name,
+      description: item.overview,
+      year: item.year,
       rating: item.vote_average,
-      posterPath: item.poster_path,
+      poster: item.poster_image_url,
+      backdrop: item.backdrop_image_url,
     }));
   } catch (error) {
     console.error("调用 Reflix API 失败:", error);
