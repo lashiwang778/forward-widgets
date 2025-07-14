@@ -57,7 +57,10 @@ async function fetchReflixTrendingTv(api, params) {
 async function reflixTrendingTv(params) {
   const page = params.page ?? 1;
   const language = params.language ?? "zh-CN";
-  const api = `https://api.reflix.top/lookup?language=${language}&path=/trending/tv/day?page=${page}&sort_by=popularity.desc`;
+  const rawPath = `/trending/tv/day?page=${page}&sort_by=popularity.desc`;
+  const encodedPath = encodeURIComponent(rawPath);
+  const api = `https://api.reflix.top/lookup?language=${language}&path=${encodedPath}`;
 
   return await fetchReflixTrendingTv(api, params);
 }
+
