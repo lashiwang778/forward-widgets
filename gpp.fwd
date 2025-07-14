@@ -1,9 +1,10 @@
 {
-  "id": "forward.reflix.trending",
+  "id": "forward.reflix.tv.trending",
   "title": "Reflix 热门剧集",
-  "description": "展示 Reflix 热门剧集列表",
+  "description": "展示 Reflix 今日热门电视剧列表",
   "requiredVersion": "0.0.1",
   "version": "1.0.0",
   "author": "糙大叔",
-  "url": "https://api.reflix.top/lookup?language=zh-CN&path=/trending/tv/day?page%3D1%26sort_by%3Dpopularity.desc"
+  "icon": "https://github.com/pack1r/ForwardWidgets/raw/main/icon.png",
+  "url": "https://raw.githubusercontent.com/lashiwang778/forward-widgets/main/widgets/forward.reflix.trending.js"
 }
