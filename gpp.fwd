@@ -5,7 +5,7 @@
   "widgets": [
     {
       "id": "forward.reflix",
-      "title": "TMDB",
+      "title": "Reflix Trending",
       "description": "获取 Reflix 的热播剧集数据",
       "requiredVersion": "0.0.1",
       "version": "1.0.0",
