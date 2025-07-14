@@ -4,7 +4,7 @@
   "icon": "https://assets.vvebo.vip/scripts/icon.png",
   "widgets": [
     {
-      "id": "reflixTrendingTv",
+      "id": "forward.reflix",
       "title": "TMDB",
       "description": "获取 TMDB 的榜单数据",
       "requiredVersion": "0.0.1",
