@@ -32,13 +32,13 @@ WidgetMetadata = {
 // 请求数据函数
 async function fetchReflixTrendingTv(api, params) {
   try {
-    const response = await Widget.http.get(api, { params });
+    const response = await Widget.http.get(api);
     if (!response || !response.data) {
       throw new Error("Reflix 数据请求失败");
     }
 
     // 假设返回的是一个数组格式，你可以按实际结构进行调整
-    return response.data.map((item) => ({
+    return response.data.results.map(...)
       id: item.id,
       type: "reflix",
       title: item.title ?? item.name,
