@@ -5,5 +5,5 @@
   "requiredVersion": "0.0.1",
   "version": "1.0.0",
   "author": "糙大叔",
-  "url": "https://raw.githubusercontent.com/lashiwang778/forward-widgets/main/forward.reflix.trending.js"
+  "url": "https://api.reflix.top/lookup?language=zh-CN&path=/trending/tv/day?page%3D1%26sort_by%3Dpopularity.desc"
 }
